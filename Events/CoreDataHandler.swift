@@ -20,7 +20,7 @@ class CoreDataHandler: NSObject {
     }
     
     // save object
-    class func saveObject(name: String, date: String, eventDescription: String, image: NSData) -> Bool {
+    class func saveEvent(name: String, date: String, eventDescription: String, image: NSData) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Event", in: context)
         let newObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -39,7 +39,7 @@ class CoreDataHandler: NSObject {
     }
     
     // fetch objects, returns array on events
-    class func fetchObjects() -> [Event]? {
+    class func fetchEvents() -> [Event]? {
         let context = getContext()
         var events:[Event]? = nil
         
@@ -63,6 +63,19 @@ class CoreDataHandler: NSObject {
             return false
         }
         
+    }
+    
+    // delete an event
+    class func deleteEvent(event: Event) -> Bool {
+        let context = getContext()
+        context.delete(event)
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
     }
     
 

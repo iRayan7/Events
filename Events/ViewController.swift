@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func refreshTableView() {
-        events = CoreDataHandler.fetchObjects()
+        events = CoreDataHandler.fetchEvents()
         self.tableView.reloadData()
         
     }
@@ -79,6 +79,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    // delete an events
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            CoreDataHandler.deleteEvent(event: events![indexPath.row])
+            self.events?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     
     // searchBar textDidChange
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

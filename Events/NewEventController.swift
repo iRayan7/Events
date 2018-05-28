@@ -121,7 +121,7 @@ class NewEventController: UIViewController, UITextViewDelegate, UINavigationCont
         if uploadedImage.image != nil {
             
         let uploadedImagePNG:NSData = UIImagePNGRepresentation(uploadedImage.image!)! as NSData
-        CoreDataHandler.saveObject(name: nameTextField.text!, date: dateTextField.text!, eventDescription: descriptionTextView.text!, image:uploadedImagePNG ) ? print("save succeeded") : print("save failed")
+        CoreDataHandler.saveEvent(name: nameTextField.text!, date: dateTextField.text!, eventDescription: descriptionTextView.text!, image:uploadedImagePNG ) ? print("save succeeded") : print("save failed")
         
         // refresh tableView data
         Singleton.shared.tableViewScreen.refreshTableView()
