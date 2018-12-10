@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Hero
 
 class NewEventController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var nameTextField: UITextField!
@@ -25,6 +26,7 @@ class NewEventController: UIViewController, UITextViewDelegate, UINavigationCont
     let picker = UIDatePicker()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +42,9 @@ class NewEventController: UIViewController, UITextViewDelegate, UINavigationCont
         uploadImageButton.layer.borderColor = UIColor(red: 109/255.0, green: 160/255.0, blue: 226/255.0, alpha: 1.0).cgColor
 
         creatDatePicker()
+        
+        view.heroModifiers = [.fade, .translate(x:0, y:-250), .rotate(x:-1.6), .scale(1.5), .opacity(0.1)]
+
     }
     
     func creatDatePicker() {

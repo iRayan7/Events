@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Hero
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -22,6 +23,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIView.animate(withDuration: 2, animations: {
+            
+            self.tableView.frame = CGRect(x: 10, y: 29, width: 234, height: 234)
+        })
         
         // to reload tableView from any class
         Singleton.shared.tableViewScreen = self
@@ -45,6 +51,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         events = CoreDataHandler.fetchEvents()
         self.tableView.reloadData()
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.transform = CGAffineTransform(translationX: 0, y: 100).concatenating(CGAffineTransform(scaleX: 0.3, y: 0.3))
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.7) {
+            cell.transform = .identity
+            cell.alpha = 1
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,6 +137,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return .lightContent
     }
 
+   
 
 }
+
 
